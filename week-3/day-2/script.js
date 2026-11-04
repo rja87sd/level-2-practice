@@ -57,7 +57,9 @@ console.log("Step 3 object:", exampleParsed);
 console.log("Step 3 price:", exampleParsed.price);
 
 // TODO: Write a JSON string for one of YOUR menu items. Parse it. Log one property.
-
+const tacoJson = '{"name": "Taco", "price": 2.00}';
+const tacoParsed = JSON.parse(tacoJson);
+console.log("Step 3 Name:", tacoParsed.name);
 
 // ---------- Step 4: JavaScript → JSON text ----------
 // Example:
@@ -65,6 +67,8 @@ const exampleBack = JSON.stringify(exampleParsed);
 console.log("Step 4:", exampleBack, typeof exampleBack);   // it's a string again
 
 // TODO: Turn your parsed menu item back into a JSON string and log it with typeof.
+const tacoBack = JSON.stringify(tacoParsed);
+console.log("Step 4:", tacoBack, typeof tacoBack);
 
 
 // ---------- Extra practice (if you finish early) ----------
