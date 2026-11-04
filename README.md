@@ -45,3 +45,8 @@ git push
 - **Red error in the console?** Read the line number on the right. Go to that line.
 - **Nothing shows up?** Check you saved the file, and that you are looking at the right day's page.
 - Still stuck after 10 minutes? Ask in the breakout room or in chat.
+
+
+| Week | Theme | Days |
+| --- | --- | --- |
+| [Week 3](week-3/) | JavaScript: My Food Truck | [Day 1](week-3/day-1/) |
