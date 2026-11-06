@@ -51,7 +51,11 @@ for (let i = 0; i < menu.length; i++) {
 // YOUR TURN: don't copy this one. Change the example above,
 // so each line shows the name AND the price, like "Taco: $4.5".
 // Change one thing: menu[i].name → menu[i].name + ": $" + menu[i].price
-
+const menuPlus = document.querySelector("#menu-text");
+menuPlus.textContent = "";
+for (let i = 0; i < menu.length; i++) {
+  menuPlus.textContent = menuPlus.textContent + menu[i].name + ": $" + menu[i].price + "\n";
+}
 
 // ---------- Step 4: Add up a total ----------
 // EXAMPLE: COUNT the items. count starts at 0 BEFORE the loop,
@@ -64,7 +68,11 @@ console.log("Items:", count);
 
 // YOUR TURN: add up every PRICE into a total. Log it.
 // Change: count → total, and + 1 → + menu[i].price
-
+let total = 0;
+for (let i = 0; i < menu.length; i++) {
+  total = total + menu[i].price;
+}
+console.log("Total cost:", total);
 
 // ---------- Extra (if you finish early): only SOME items ----------
 // EXAMPLE: logs only the items that cost LESS than $5.
@@ -78,3 +86,8 @@ for (let i = 0; i < menu.length; i++) {
 
 // YOUR TURN: log only the items that cost MORE than $5, like "Fancy: Burrito".
 // Change: < → >   and   "Cheap:" → "Fancy:"
+for (let i = 0; i < menu.length; i++) {
+  if (menu[i].price > 5) {
+    console.log("Fancy:", menu[i].name);
+  }
+}
