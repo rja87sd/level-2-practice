@@ -52,3 +52,4 @@ git push
 | [Week 3](week-3/) | JavaScript: My Food Truck | [Day 1](week-3/day-1/) |
 | [Week 3](week-3/) | JavaScript: My Food Truck | [Day 2](week-3/day-2/) |
 | [Week 3](week-3/) | JavaScript: My Food Truck | [Day 2](week-3/day-4/) |
+| [Week 4](week-4/) | JavaScript: My Food Truck | [Day 2](week-4/day-1/) |
