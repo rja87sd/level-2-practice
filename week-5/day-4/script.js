@@ -9,6 +9,12 @@ const recipeArea = document.getElementById("recipe");
 
 async function loadRecipe() {
   try {
+
+    if (input.value === "") {
+      statusText.textContent = "Please enter a number between 1 and 50.";
+      return;
+    }
+
     const url = `https://dummyjson.com/recipes/${input.value}`;
 
     recipeArea.textContent = ""; // clear the old recipe first
@@ -55,9 +61,33 @@ async function loadRecipe() {
     ready.textContent = `Ready in ${recipe.cookTimeMinutes} Minutes`;
     card.appendChild(ready);
 
+    const recipeIngredients = document.createElement("h2");
+    recipeIngredients.className = "fs-2";
+    recipeIngredients.textContent = "Recipe Ingredients";
+    card.appendChild(recipeIngredients);
+
+    const list = document.createElement("ul");
+    const ingredients = recipe.ingredients;
+    ingredients.forEach(function (ingredient) {
+      const item = document.createElement("li");
+      item.textContent = ingredient;
+      list.appendChild(item);
+    });
+
+    card.appendChild(list);
+
+    const img = document.createElement("img");
+    img.src = recipe.image;
+    img.alt = recipe.name;
+    img.className = "img-fluid mb-2 rounded-2";
+    card.prepend(img);
+
+
+
     recipeArea.appendChild(card);
   } catch (error) {
-    statusText.textContent = "Server cannot be reached. Check Internet connection.";
+    statusText.textContent =
+      "Server cannot be reached. Check Internet connection.";
   }
 }
 
