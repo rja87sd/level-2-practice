@@ -7,43 +7,61 @@ const button = document.getElementById("load-btn");
 const statusText = document.getElementById("status");
 const recipeArea = document.getElementById("recipe");
 
-
 async function loadRecipe() {
-  const url = "https://dummyjson.com/recipes/" + input.value;
+  try {
+    const url = `https://dummyjson.com/recipes/${input.value}`;
 
-  recipeArea.textContent = "";   // clear the old recipe first
+    recipeArea.textContent = ""; // clear the old recipe first
 
-  // ---------- Step 2 goes here (loading message) ----------
+    // ---------- Step 2 goes here (loading message) ----------
+    statusText.textContent = "Loading...";
 
+    const response = await fetch(url);
 
-  const response = await fetch(url);
+    // ---------- Step 3 goes here (no recipe with that number) ----------
+    if (!response.ok) {
+      statusText.textContent =
+        "No recipe with that number. Try entering a number between 1 and 50.";
+      return;
+    }
 
-  // ---------- Step 3 goes here (no recipe with that number) ----------
+    const recipe = await response.json();
+    console.log(recipe); // look at ALL the fields in the console, then pick a few
+    statusText.textContent = "";
 
+    // ---------- Step 1: show a few fields ----------
+    // EXAMPLE: a card with the recipe's name. Same 4 moves as Week 4.
+    const card = document.createElement("div");
+    card.className = "card p-3";
 
-  const recipe = await response.json();
-  console.log(recipe);   // look at ALL the fields in the console, then pick a few
+    const title = document.createElement("h2");
+    title.className = "h4";
+    title.textContent = recipe.name;
+    card.appendChild(title);
 
-  // ---------- Step 1: show a few fields ----------
-  // EXAMPLE: a card with the recipe's name. Same 4 moves as Week 4.
-  const card = document.createElement("div");
-  card.className = "card p-3";
+    recipeArea.appendChild(card);
 
-  const title = document.createElement("h2");
-  title.className = "h4";
-  title.textContent = recipe.name;
-  card.appendChild(title);
+    // YOUR TURN: add 2 more fields to the card, under the title. For example:
+    //   a <p> with the cuisine:           "Cuisine: Italian"
+    //   a <p> with the prep time:         "Ready in 20 minutes"   (recipe.prepTimeMinutes)
+    // Each one: createElement, textContent, card.appendChild.
+    const cuisine = document.createElement("h2");
+    cuisine.className = "fs-3 h4";
+    cuisine.textContent = `Cuisine: ${recipe.cuisine}`;
+    card.appendChild(cuisine);
 
-  recipeArea.appendChild(card);
+    const ready = document.createElement("h2");
+    ready.className = "fs-3 h4";
+    ready.textContent = `Ready in ${recipe.cookTimeMinutes} Minutes`;
+    card.appendChild(ready);
 
-  // YOUR TURN: add 2 more fields to the card, under the title. For example:
-  //   a <p> with the cuisine:           "Cuisine: Italian"
-  //   a <p> with the prep time:         "Ready in 20 minutes"   (recipe.prepTimeMinutes)
-  // Each one: createElement, textContent, card.appendChild.
+    recipeArea.appendChild(card);
+  } catch (error) {
+    statusText.textContent = "Server cannot be reached. Check Internet connection.";
+  }
 }
 
 button.addEventListener("click", loadRecipe);
-
 
 // ---------- Step 2: a loading message ----------
 // The request takes a moment. Tell the user something is happening.
@@ -52,7 +70,6 @@ button.addEventListener("click", loadRecipe);
 // Then, right after the line  const recipe = await response.json();  add:
 //   statusText.textContent = "";
 // Check: in DevTools → Network, set "No throttling" to "Slow 4G". Click. You see "Loading...".
-
 
 // ---------- Step 3: no recipe with that number ----------
 // Try number 9999. The card says "undefined". Look at the console: the server answered
@@ -65,7 +82,6 @@ button.addEventListener("click", loadRecipe);
 //   }
 // Check: 9999 shows your message. 1 still shows a recipe.
 
-
 // ---------- Step 4: no internet ----------
 // In DevTools → Network, set "No throttling" to "Offline". Click. Red error in the console,
 // and the page just says "Loading..." forever.
@@ -77,7 +93,6 @@ button.addEventListener("click", loadRecipe);
 //     statusText.textContent = "Can't reach the recipe server. Check your internet.";
 //   }
 // Check: Offline shows your message. Set it back to "No throttling" and it works again.
-
 
 // ---------- Extra (if you finish early) ----------
 // 1. Show the ingredients as a list: createElement("ul"), then recipe.ingredients.forEach(...)
