@@ -59,3 +59,4 @@ git push
 | [Week 5](week-5/) | APIs and Postman | [Day 2](week-5/day-2/) |
 | [Week 5](week-5/) | APIs and Postman | [Day 4](week-5/day-4/) |
 | [Week 6](week-6/) | Async Requests and Auth | [Day 1](week-6/day-1/) |
+| [Week 6](week-6/) | Async Requests and Auth | [Day 2](week-6/day-2/) |
